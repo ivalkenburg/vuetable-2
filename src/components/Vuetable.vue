@@ -585,6 +585,7 @@ export default {
             dataClass: (field.dataClass === undefined) ? '' : field.dataClass,
             callback: (field.callback === undefined) ? '' : field.callback,
             visible: (field.visible === undefined) ? true : field.visible,
+            options: (field.options === undefined) ? {} : field.options,
           }
         }
         self.tableFields.push(obj)
