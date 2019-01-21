@@ -40,7 +40,12 @@
               </th>
             </template>
             <template v-else>
-              <th @click="orderBy(field, $event)"
+              <th v-if="field.abbr" @click="orderBy(field, $event)"
+                :id="'_' + field.name"
+                  :style="{width: field.width}"
+                :class="['vuetable-th-'+field.name, field.titleClass,  {'sortable': isSortable(field)}]"
+              ><abbr :title="field.abbr" v-html="renderTitle(field)"></abbr></th>
+              <th v-else @click="orderBy(field, $event)"
                 :id="'_' + field.name"
                   :style="{width: field.width}"
                 :class="['vuetable-th-'+field.name, field.titleClass,  {'sortable': isSortable(field)}]"
@@ -177,6 +182,11 @@
             </th>
           </template>
           <template v-else>
+            <th v-if="field.abbr" @click="orderBy(field, $event)"
+              :id="'_' + field.name"
+              :style="{width: field.width}"
+              :class="['vuetable-th-'+field.name, field.titleClass,  {'sortable': isSortable(field)}]"
+            ><abbr :title="field.abbr" v-html="renderTitle(field)"></abbr></th>
             <th @click="orderBy(field, $event)"
               :id="'_' + field.name"
               :style="{width: field.width}"
