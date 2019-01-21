@@ -187,7 +187,7 @@
               :style="{width: field.width}"
               :class="['vuetable-th-'+field.name, field.titleClass,  {'sortable': isSortable(field)}]"
             ><abbr :title="field.abbr" v-html="renderTitle(field)"></abbr></th>
-            <th @click="orderBy(field, $event)"
+            <th v-else @click="orderBy(field, $event)"
               :id="'_' + field.name"
               :style="{width: field.width}"
               :class="['vuetable-th-'+field.name, field.titleClass,  {'sortable': isSortable(field)}]"
