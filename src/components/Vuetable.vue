@@ -29,9 +29,14 @@
                     :style="{width: field.width}"
                   :class="['vuetable-th-sequence', field.titleClass || '']" v-html="renderTitle(field)">
               </th>
-              <th v-if="notIn(extractName(field.name), ['__sequence', '__checkbox', '__component', '__slot'])"
+              <th v-if="notIn(extractName(field.name), ['__sequence', '__checkbox', '__component', '__slot']) && !field.abbr"
                     :style="{width: field.width}"
                   :class="['vuetable-th-'+field.name, field.titleClass || '']" v-html="renderTitle(field)">
+              </th>
+              <th v-if="notIn(extractName(field.name), ['__sequence', '__checkbox', '__component', '__slot'])"
+                    :style="{width: field.width}"
+                  :class="['vuetable-th-'+field.name, field.titleClass || '']">
+                  <abbr :title="field.name" v-html="renderTitle(field)"></abbr>
               </th>
             </template>
             <template v-else>
@@ -161,9 +166,14 @@
                 :style="{width: field.width}"
                 :class="['vuetable-th-sequence', field.titleClass || '']" v-html="renderTitle(field)">
             </th>
-            <th v-if="notIn(extractName(field.name), ['__sequence', '__checkbox', '__component', '__slot'])"
+            <th v-if="notIn(extractName(field.name), ['__sequence', '__checkbox', '__component', '__slot'])" && !field.abbr
                 :style="{width: field.width}"
                 :class="['vuetable-th-'+field.name, field.titleClass || '']" v-html="renderTitle(field)">
+            </th>
+            <th v-if="notIn(extractName(field.name), ['__sequence', '__checkbox', '__component', '__slot'])"
+                :style="{width: field.width}"
+                :class="['vuetable-th-'+field.name, field.titleClass || '']">
+              <abbr :title="field.name" v-html="renderTitle(field)"></abbr>
             </th>
           </template>
           <template v-else>
@@ -578,6 +588,7 @@ export default {
         } else {
           obj = {
             name: field.name,
+            abbr: field.abbr,
             width: field.width,
             title: (field.title === undefined) ? self.setTitle(field.name) : field.title,
             sortField: field.sortField,
