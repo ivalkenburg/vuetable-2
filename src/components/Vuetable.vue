@@ -316,9 +316,7 @@ export default {
     },
     dataManager: {
       type: Function,
-      default () {
-        return null
-      }
+      default: null,
     },
     dataPath: {
         type: String,
@@ -1149,12 +1147,13 @@ export default {
     callDataManager () {
       if (this.dataManager === null && this.data === null) return
 
-      if (Array.isArray(this.data)) {
+      if (Array.isArray(this.data) && this.apiMode) {
         console.log('data mode: array')
         this.setData(this.data)
       } else {
         this.normalizeSortOrder()
-        this.setData(this.dataManager(this.sortOrder, this.makePagination()))
+        
+        this.setData(this.dataManager ? this.dataManager(this.sortOrder, this.makePagination()) : this.data)
       }
     },
     onRowClass (dataItem, index) {
